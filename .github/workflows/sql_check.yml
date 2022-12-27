@@ -8,7 +8,7 @@ jobs:
       - uses: yokawasa/action-sqlcheck@v1.4.0
         with:
           post-comment: true
-          risk-level: 3
+          risk-level: 1
           verbose: false
           token: ${{ secrets.GITHUB_TOKEN }}
           postfixes: |
