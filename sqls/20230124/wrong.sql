@@ -6,7 +6,7 @@ WHERE
 	fanclub_memberships.id = 238016;
 
 
-UPDATEfanclub_memberships
+UPDATE fanclub_memberships
 SET	fanclub_memberships.payment_method_id = 1
 WHERE
 	fanclub_memberships.id = 238016
