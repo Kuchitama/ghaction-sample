@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "sqlint": "^1.2.1"
+  }
+}

@@ -1,18 +1,21 @@
-name: SQL Check
-on: [pull_request]
+name: SQL Syntax Check
+on: [push]
 jobs:
-  tests:
+  sqlfluff:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: yokawasa/action-sqlcheck@v1.4.0
+      - uses: actions/setup-python@v1
+      - uses: BSFishy/pip-action@v1
         with:
-          post-comment: true
-          risk-level: 1
-          verbose: false
-          token: ${{ secrets.GITHUB_TOKEN }}
-          postfixes: |
-            sql
-      - name: Get output
-        run: echo "Issues found in previous step"
-        if: steps.sqlcheck.outputs.issue-found
+          packages: |
+            sqlfluff
+      - uses: tj-actions/changed-files@v35
+        id: changed-files
+        with:
+          files: sqls/**/*.sql
+      - name: Parse test to all changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            bash sql_check.sh $file
+          done
