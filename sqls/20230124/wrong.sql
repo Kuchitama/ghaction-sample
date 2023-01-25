@@ -1,16 +1,16 @@
 UPDATE
-	fanclub_memberships --comment -- wrong comment
+	user_table --comment -- wrong comment
 SET
-	fanclub_memberships.payment_method_id = 1
+	user_table.payment_method_id = 1
 WHERE
-	fanclub_memberships.id = 238016;
+	user_table.id = 2;
 
 
-UPDATEfanclub_memberships
-SET	fanclub_memberships.payment_method_id = 1
+UPDATE user_table
+SET	user_table.payment_method_id = 1
 WHERE
-	fanclub_memberships.id = 238016
-  and fanclub_memberships.id in (1,
+	user_table.id = 3
+  and user_table.id in (1,
 		2,
 		3, -- invalid comma
 	);

@@ -13,20 +13,19 @@ for file in ${files[@]}; do
     continue
   fi
 
-  _=$(sqlfluff parse --dialect mysql $file)
-  res=$?
+  # show the failure in stdout
+  skip=1
+  out=$(sqlfluff parse --dialect mysql $file)
 
   # go to next file if parsing is succeeded
-  if [ $res -eq 0 ]; then
+  if [ $? -eq 0 ]; then
     continue;
   fi
 
   # set result code = 1 if sqlfluff was failure
   result=1
 
-  # show the failure in stdout
-  skip=1
-  sqlfluff parse --dialect mysql $file | while read line
+  echo "$out" | while read line
   do
     # suppress warning result
     if [ "$line" == "==== parsing violations ====" ]; then
